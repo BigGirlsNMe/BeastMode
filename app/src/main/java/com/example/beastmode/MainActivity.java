@@ -5,9 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +28,20 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        Button inflateWorkoutListButton = (Button)findViewById(R.id.inflateWorkoutListButton);
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.inflateWorkoutListButton:
+                Log.d("Hell","no");
+                break;
+//            case R.id.button_b_id:
+// handle button B click;
+//              break;
+            default:
+                throw new RuntimeException("Unknow button ID");
+        }
     }
 
     @Override
