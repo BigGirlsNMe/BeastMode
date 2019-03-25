@@ -3,6 +3,9 @@ package com.example.beastmode;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,13 +32,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Button inflateWorkoutListButton = (Button)findViewById(R.id.inflateWorkoutListButton);
+
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.inflateWorkoutListButton:
                 Log.d("Hell","no");
+
+                    Fragment androidFragment = new AndroidFragment();
+                    this.setDefaultFragment(androidFragment);
+               // Fragment androidFragment = new AndroidFragment();
+              //  replaceFragment(androidFragment);
                 break;
+
 //            case R.id.button_b_id:
 // handle button B click;
 //              break;
@@ -43,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 throw new RuntimeException("Unknow button ID");
         }
     }
+
+    // Replace current Fragment with the destination Fragment.
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,4 +78,26 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // This method is used to set the default fragment that will be shown.
+    private void setDefaultFragment(Fragment defaultFragment)
+    {
+        this.replaceFragment(defaultFragment);
+    }
+    // Replace current Fragment with the destination Fragment.
+    public void replaceFragment(Fragment destFragment)
+    {
+        // First get FragmentManager object.
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+
+        // Begin Fragment transaction.
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Replace the layout holder with the required Fragment object.
+        fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, destFragment);
+
+        // Commit the Fragment replace action.
+        fragmentTransaction.commit();
+    }
+
 }
