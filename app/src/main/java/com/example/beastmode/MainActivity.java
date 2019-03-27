@@ -14,7 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.beastmode.dummy.DummyContent;
+
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +33,39 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        Button inflateWorkoutListButton = (Button)findViewById(R.id.inflateWorkoutListButton);
+        Button inflateWorkoutListButton = (Button) findViewById(R.id.inflateWorkoutListButton);
+        Button testWorkoutButton = (Button) findViewById(R.id.inflateTestButton);
 
     }
+
+//    @Override
+//    public void onAttachFragment(Fragment fragment) {
+//        if(fragment instanceof WorkoutObjectFragment)
+//            super.onAttachFragment(fragment);
+//            WorkoutObjectFragment workoutObjectFragment = (WorkoutObjectFragment) fragment;
+//            workoutObjectFragment.setmListener(this);
+//
+//    }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.inflateWorkoutListButton:
-                Log.d("Hell","no");
-
-                    Fragment androidFragment = new AndroidFragment();
-                    this.setDefaultFragment(androidFragment);
-               // Fragment androidFragment = new AndroidFragment();
-              //  replaceFragment(androidFragment);
+                Log.d("LOG","Inside Inflate Workout List Button");
+                //This is to create an android fragment. REcommended set this in oncreate but testing it here
+                Fragment androidFragment = new AndroidFragment();
+                this.setDefaultFragment(androidFragment);
+                //For replacing fragment
+                //Fragment androidFragment = new AndroidFragment();
+                //replaceFragment(androidFragment);
                 break;
+            case R.id.inflateTestButton:
+                Fragment workoutFragment = new WorkoutObjectFragment();
+                workoutFragment.setArguments(getIntent().getExtras());
 
-//            case R.id.button_b_id:
-// handle button B click;
-//              break;
+            //         getSupportFragmentManager().beginTransaction()
+              //             .add(R.id.dynamic_fragment_frame_layout, workoutFragment).commit();
+                //  this.setDefaultFragment(workoutFragment);
+                //break;
             default:
                 throw new RuntimeException("Unknow button ID");
         }
@@ -100,4 +117,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+//    @Override
+//    public Void onListFragmentInteraction(DummyContent.DummyItem item) {
+//        return null;
+//    }
 }
